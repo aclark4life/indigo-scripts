@@ -25,7 +25,7 @@ Write a Python script that does the following: Notify owner and administrative u
 
 ::
 
-     ~/Developer/aclarknet/indigo-tasks   master  bin/python garage_door_open.py
+     ~/Developer/aclarknet/indigo-tasks > master > bin/python garage_door_open.py
     Door is closed
     Door is open
     Time is 1506603461.545657
