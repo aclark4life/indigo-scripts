@@ -21,3 +21,26 @@ Write a Python script that does the following: Notify owner and administrative u
                     if garage door closed, exit loop 2, else loop
             if garage door closed, exit loop 1, else loop
     END
+
+
+::
+
+     ~/Developer/aclarknet/indigo-tasks   master  bin/python garage_door_open.py
+    Door is closed
+    Door is open
+    Time is 1506603461.545657
+    Door is closed
+    Time is 1506603471.546791
+    Door is closed
+    Time is 1506603481.548479
+    Door is closed
+    Time is 1506603491.549773
+    Door is closed
+    Time is 1506603501.551779
+    Door is closed
+    Time is 1506603511.554742
+    Door is closed
+    Time is 1506603521.555243
+    Door is closed
+    Time is 1506603531.557129
+
