@@ -1,5 +1,9 @@
-Indigo Tasks
-============
+Indigo Scripts
+==============
+
+To be copied to ``/Library/Application Support/Perceptive Automation/Indigo 7`` as described here:
+
+- http://wiki.indigodomo.com/doku.php?id=indigo_7_documentation:plugin_guide#indigo_support_folder_structure
 
 Task #1
 -------
