@@ -5,6 +5,10 @@ To be copied to ``/Library/Application Support/Perceptive Automation/Indigo 7`` 
 
 - http://wiki.indigodomo.com/doku.php?id=indigo_7_documentation:plugin_guide#indigo_support_folder_structure
 
+And to be executed as described here("You can drop Python scripts and AppleScripts into this folder and they will show up in your plugin's sub-menu on the new “Plugins” menu. "):
+
+- http://wiki.indigodomo.com/doku.php?id=indigo_7_documentation:plugin_guide#menu_items_folder
+
 Task #1
 -------
 
