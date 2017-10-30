@@ -362,3 +362,7 @@ vagrant-update:
 # Requires npm i -g create-webpack-config
 webpack-init:
 	webpack-config
+
+# indigo-scripts
+indigo-run:
+	bin/python garage_door_status.py
