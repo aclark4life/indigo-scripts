@@ -9,6 +9,10 @@ And to be executed as described here("You can drop Python scripts and AppleScrip
 
 - http://wiki.indigodomo.com/doku.php?id=indigo_7_documentation:plugin_guide#menu_items_folder
 
+Also see:
+
+- http://wiki.indigodomo.com/doku.php?id=indigo_7_documentation:plugin_scripting_tutorial
+
 Task #1
 -------
 
@@ -16,6 +20,7 @@ Write a Python script that does the following: Notify owner and administrative u
 
 ::
 
+    # Pseudocode
     Is garage door open?
         #If garage door closed, go to END, otherwise next
         #time_opened = now
@@ -33,7 +38,7 @@ Write a Python script that does the following: Notify owner and administrative u
 
 ::
 
-     ~/Developer/aclarknet/indigo-tasks > master > bin/python garage_door_open.py
+     ~/Developer/aclarknet/indigo-scripts > master > bin/python garage_door_open.py
     Door is closed
     Door is open
     Time is 1506603461.545657
