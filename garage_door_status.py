@@ -10,8 +10,8 @@ while True:
     if state != 'closed':  # If the door is not closed
       indigo.server.sendEmailTo(EMAIL, subject=SUBJECT, body=message)  # Send mail
       indigo.server.log(message)  # Log message
-      print(msg)  # Print to screen
+      print(message)  # Print to screen
       time.sleep(60)  # Don't flood
     else:
-      print(msg)  # Print to screen
+      print(message)  # Print to screen
       time.sleep(60)  # Don't flood
