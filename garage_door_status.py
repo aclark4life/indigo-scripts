@@ -1,6 +1,7 @@
+import os
 import time
 
-EMAIL = "aclark@aclark.net"
+EMAIL = os.environ.get('INDIGO_NOTIFY_EMAIL', 'aclark@aclark.net')
 SUBJECT = "Garage Door Status Update"
 
 elapsed_time = 0
