@@ -9,10 +9,10 @@ elapsed_time = 0
 indigo.server.sendEmailTo(
     EMAIL, subject=SUBJECT, body='Waiting for garage door')  # Send mail
 
+start_time = time.time()  # https://stackoverflow.com/a/3620972
 while True:
     garage_door = indigo.devices[252434934]  # Large garage door for cars
     state = garage_door.states[u'binaryInput1.ui']  # Open or closed
-    start_time = time.time()  # https://stackoverflow.com/a/3620972
     message = ("%s is %s (%s)" %
                (garage_door.name, state,
                 elapsed_time))  # "Door is open", or "Door is closed"
@@ -24,6 +24,7 @@ while True:
         print(message)  # Print to screen
         time.sleep(60)  # Don't flood
     else:
+        start_time = time.time()  # https://stackoverflow.com/a/3620972
         elapsed_time = 0
         print(message)  # Print to screen
         time.sleep(60)  # Don't flood
