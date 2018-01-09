@@ -1,15 +1,20 @@
 import os
 import time
 
-EMAIL = os.environ.get('INDIGO_NOTIFY_EMAIL', 'aclark@aclark.net')
-SUBJECT = "Garage Door Status Update"
+# Configure email
+EMAIL_ADDRESS = os.environ.get('INDIGO_NOTIFY_EMAIL', 'aclark@aclark.net')
+EMAIL_SUBJECT = "Garage Door Status Update"
 
-elapsed_time = 0
-
+# Send first message to email address and server log
+message = 'Waiting for garage door'
 indigo.server.sendEmailTo(
-    EMAIL, subject=SUBJECT, body='Waiting for garage door')  # Send mail
+    EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)  # Send mail
+indigo.server.log(message)  # Log message
 
+# Keep track of time
+elapsed_time = 0
 start_time = time.time()  # https://stackoverflow.com/a/3620972
+
 while True:
     garage_door = indigo.devices[252434934]  # Large garage door for cars
     state = garage_door.states[u'binaryInput1.ui']  # Open or closed
@@ -19,12 +24,12 @@ while True:
     if state != 'closed':  # If the garage door is not closed
         elapsed_time = time.time() - start_time
         indigo.server.sendEmailTo(
-            EMAIL, subject=SUBJECT, body=message)  # Send mail
+            EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)  # Send mail
         indigo.server.log(message)  # Log message
         print(message)  # Print to screen
         time.sleep(60)  # Don't flood
     else:
-        start_time = time.time()  # https://stackoverflow.com/a/3620972
-        elapsed_time = 0
+        start_time = time.time()  # Reset time tracking
+        elapsed_time = 0  # Reset time tracking
         print(message)  # Print to screen
         time.sleep(60)  # Don't flood
