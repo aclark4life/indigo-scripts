@@ -10,6 +10,7 @@ message = 'Waiting for garage door to open or close'
 indigo.server.sendEmailTo(
     EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)  # Send mail
 indigo.server.log(message)  # Log message
+print(message)  # Print to screen
 
 # Keep track of time
 elapsed_time = 0
