@@ -6,7 +6,7 @@ EMAIL_ADDRESS = os.environ.get('INDIGO_NOTIFY_EMAIL', 'aclark@aclark.net')
 EMAIL_SUBJECT = "Garage Door Status Update"
 
 # Send first message to email address and server log
-message = 'Waiting for garage door'
+message = 'Waiting for garage door to open or close'
 indigo.server.sendEmailTo(
     EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)  # Send mail
 indigo.server.log(message)  # Log message
