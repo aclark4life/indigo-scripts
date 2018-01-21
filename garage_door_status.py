@@ -24,11 +24,21 @@ while True:
                 elapsed_time))  # "Door is open", or "Door is closed"
     if state != 'closed':  # If the garage door is not closed
         elapsed_time = time.time() - start_time
-        indigo.server.sendEmailTo(
-            EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)  # Send mail
-        indigo.server.log(message)  # Log message
-        print(message)  # Print to screen
-        time.sleep(60)  # Don't flood
+        if elapsed_time > 900:  # 15 minutes
+            indigo.server.sendEmailTo(
+                EMAIL_ADDRESS, subject=EMAIL_SUBJECT,
+                body=message)  # Send mail
+            indigo.server.log(message)  # Log message
+            print(message)  # Print to screen
+            time.sleep(60)  # Don't flood
+        if elapsed_time > 1800:  # 30 minutes
+            # Close door here
+            indigo.server.sendEmailTo(
+                EMAIL_ADDRESS, subject=EMAIL_SUBJECT,
+                body=message)  # Send mail
+            indigo.server.log(message)  # Log message
+            print(message)  # Print to screen
+            time.sleep(60)  # Don't flood
     else:
         start_time = time.time()  # Reset time tracking
         elapsed_time = 0  # Reset time tracking
