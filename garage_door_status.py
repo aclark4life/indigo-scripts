@@ -33,7 +33,9 @@ while True:
             time.sleep(60)
 
         if time_elapsed > 1800:
-            # XXX Close door
+
+            # XXX Actually close the door here
+
             indigo.server.sendEmailTo(
                 email_address, subject=email_subject, body=email_message)
             indigo.server.log(email_message)
