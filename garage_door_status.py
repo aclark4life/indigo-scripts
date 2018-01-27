@@ -1,38 +1,40 @@
 import os
 import time
 
-EMAIL_ADDRESS = os.environ.get('INDIGO_NOTIFY_EMAIL', 'aclark@aclark.net')
-EMAIL_SUBJECT = "Garage Door Status Update"
+email_address = os.environ.get('INDIGO_NOTIFY_EMAIL', 'aclark@aclark.net')
+email_subject = 'Garage Door Status Update'
+email_message = 'Waiting for garage door to open or close'
 
-message = 'Waiting for garage door to open or close'
-indigo.server.sendEmailTo(EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)
-indigo.server.log(message)
-print(message)
+indigo.server.sendEmailTo(
+    email_address, subject=email_subject, body=email_message)
+indigo.server.log(email_message)
 
-elapsed_time = 0
-start_time = time.time()  # https://stackoverflow.com/a/3620972
+time_elapsed = 0
+time_start = time.time()  # https://stackoverflow.com/a/3620972
 
 while True:
-    garage_door = indigo.devices[252434934]
-    state = garage_door.states[u'binaryInput1.ui']
-    message = ("%s is %s (%s)" % (garage_door.name, state, elapsed_time))
-    if state != 'closed':
-        elapsed_time = time.time() - start_time
-        if elapsed_time > 900:  # 15 minutes
+    door_obj = indigo.devices[252434934]
+    door_state = door_obj.states[u'binaryInput1.ui']
+
+    email_message = ("%s is %s (%s)" % (door_obj.name, door_state,
+                                        time_elapsed))
+
+    if door_state != 'closed':
+        time_elapsed = time.time() - time_start
+
+        if time_elapsed > 900:  # 15 minutes
             indigo.server.sendEmailTo(
-                EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)
-            indigo.server.log(message)
-            print(message)
+                email_address, subject=email_subject, body=email_message)
+            indigo.server.log(email_message)
             time.sleep(60)
-        if elapsed_time > 1800:
+
+        if time_elapsed > 1800:
             # XXX Close door
             indigo.server.sendEmailTo(
-                EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)
-            indigo.server.log(message)
-            print(message)
+                email_address, subject=email_subject, body=email_message)
+            indigo.server.log(email_message)
             time.sleep(60)
     else:
-        start_time = time.time()  # Reset time tracking
-        elapsed_time = 0
-        print(message)
+        time_start = time.time()  # Reset time tracking
+        time_elapsed = 0
         time.sleep(60)
