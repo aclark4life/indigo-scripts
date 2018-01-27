@@ -1,46 +1,38 @@
 import os
 import time
 
-# Configure email
 EMAIL_ADDRESS = os.environ.get('INDIGO_NOTIFY_EMAIL', 'aclark@aclark.net')
 EMAIL_SUBJECT = "Garage Door Status Update"
 
-# Send first message to email address and server log
 message = 'Waiting for garage door to open or close'
-indigo.server.sendEmailTo(
-    EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)  # Send mail
-indigo.server.log(message)  # Log message
-print(message)  # Print to screen
+indigo.server.sendEmailTo(EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)
+indigo.server.log(message)
+print(message)
 
-# Keep track of time
 elapsed_time = 0
 start_time = time.time()  # https://stackoverflow.com/a/3620972
 
 while True:
-    garage_door = indigo.devices[252434934]  # Large garage door for cars
-    state = garage_door.states[u'binaryInput1.ui']  # Open or closed
-    message = ("%s is %s (%s)" %
-               (garage_door.name, state,
-                elapsed_time))  # "Door is open", or "Door is closed"
-    if state != 'closed':  # If the garage door is not closed
+    garage_door = indigo.devices[252434934]
+    state = garage_door.states[u'binaryInput1.ui']
+    message = ("%s is %s (%s)" % (garage_door.name, state, elapsed_time))
+    if state != 'closed':
         elapsed_time = time.time() - start_time
         if elapsed_time > 900:  # 15 minutes
             indigo.server.sendEmailTo(
-                EMAIL_ADDRESS, subject=EMAIL_SUBJECT,
-                body=message)  # Send mail
-            indigo.server.log(message)  # Log message
-            print(message)  # Print to screen
-            time.sleep(60)  # Don't flood
-        if elapsed_time > 1800:  # 30 minutes
-            # Close door here
+                EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)
+            indigo.server.log(message)
+            print(message)
+            time.sleep(60)
+        if elapsed_time > 1800:
+            # XXX Close door
             indigo.server.sendEmailTo(
-                EMAIL_ADDRESS, subject=EMAIL_SUBJECT,
-                body=message)  # Send mail
-            indigo.server.log(message)  # Log message
-            print(message)  # Print to screen
-            time.sleep(60)  # Don't flood
+                EMAIL_ADDRESS, subject=EMAIL_SUBJECT, body=message)
+            indigo.server.log(message)
+            print(message)
+            time.sleep(60)
     else:
         start_time = time.time()  # Reset time tracking
-        elapsed_time = 0  # Reset time tracking
-        print(message)  # Print to screen
-        time.sleep(60)  # Don't flood
+        elapsed_time = 0
+        print(message)
+        time.sleep(60)
