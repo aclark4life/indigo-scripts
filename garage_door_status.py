@@ -22,6 +22,10 @@ while True:
     if door_state != 'closed':
         time_elapsed = time.time() - time_start
 
+        indigo.server.sendEmailTo(
+            email_address, subject=email_subject, body=email_message)
+        indigo.server.log(email_message)
+
         if time_elapsed > 900:  # 15 minutes
             indigo.server.sendEmailTo(
                 email_address, subject=email_subject, body=email_message)
