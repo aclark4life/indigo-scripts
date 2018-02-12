@@ -4,6 +4,7 @@ import time
 email_address = os.environ.get('INDIGO_NOTIFY_EMAIL', 'aclark@aclark.net')
 email_subject = 'Garage Door Status Update'
 email_message = 'Waiting for garage door to open or close'
+email_message_5 = 'Garage door has been open for 5 minutes. Please check camera and close if needed.'
 
 indigo.server.sendEmailTo(
     email_address, subject=email_subject, body=email_message)
@@ -22,17 +23,17 @@ while True:
     if door_state != 'closed':
         time_elapsed = time.time() - time_start
 
-        if time_elapsed > 300:  # 15 minutes
+        if time_elapsed > 300:  # 5 minutes
             indigo.server.sendEmailTo(
-                email_address, subject=email_subject, body=email_message)
+                email_address, subject=email_subject, body=email_message_5)
             indigo.server.log(email_message)
-            time.sleep(60)
+            time.sleep(300)
 
         if time_elapsed > 900:  # 15 minutes
             indigo.server.sendEmailTo(
                 email_address, subject=email_subject, body=email_message)
             indigo.server.log(email_message)
-            time.sleep(60)
+            time.sleep(300)
 
         if time_elapsed > 1800:
 
@@ -41,7 +42,7 @@ while True:
             indigo.server.sendEmailTo(
                 email_address, subject=email_subject, body=email_message)
             indigo.server.log(email_message)
-            time.sleep(60)
+            time.sleep(300)
     else:
         time_start = time.time()  # Reset time tracking
         time_elapsed = 0
