@@ -26,6 +26,12 @@ while True:
             email_address, subject=email_subject, body=email_message)
         indigo.server.log(email_message)
 
+        if time_elapsed > 300:  # 15 minutes
+            indigo.server.sendEmailTo(
+                email_address, subject=email_subject, body=email_message)
+            indigo.server.log(email_message)
+            time.sleep(60)
+
         if time_elapsed > 900:  # 15 minutes
             indigo.server.sendEmailTo(
                 email_address, subject=email_subject, body=email_message)
