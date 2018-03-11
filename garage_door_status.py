@@ -10,9 +10,7 @@ def send_mail(**kwargs):
     for email_to in INDIGO_ADMINS.split(','):
         indigo.server.log("Sending email to: %s." % email_to)
         indigo.server.sendEmailTo(
-            email_to,
-            subject=kwargs['email_subject'],
-            body=kwargs['email_message'])
+            email_to, subject=kwargs['subject'], body=kwargs['body'])
 
 
 # ------------------------------------------------------------------------------
