@@ -26,6 +26,9 @@ Write a Python script that does the following: Notify owner and administrative u
 Installation and usage from Terminal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Install
++++++++
+
 ::
 
     alias indigohost='/Library/Application\ Support/Perceptive\ Automation/Indigo\ 7/IndigoPluginHost.app/Contents/MacOS/IndigoPluginHost'
@@ -34,14 +37,14 @@ Installation and usage from Terminal
     export INDIGO_ADMINS=aclark@aclark.net,
 
 Start
-~~~~~
++++++
 
 ::
 
     indigohost -x garage_door_status.py
 
 Stop
-~~~~
+++++
 
 ::
 
