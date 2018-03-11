@@ -1,9 +1,10 @@
 import os
 import time
 
-INDIGO_ADMINS = ('aclark@aclark.net', )
+INDIGO_ADMINS = os.environ.get('INDIGO_ADMINS', 'aclark@aclark.net')
+if INDIGO_ADMINS and INDIGO_ADMINS.find(',') == -1:
+    INDIGO_ADMINS = [INDIGO_ADMINS]
 
-indigo.server.sendEmailTo('aclark@aclark.net', subject='wtf', body='wtf')
 
 def send_mail(**kwargs):
     for email_to in INDIGO_ADMINS:
