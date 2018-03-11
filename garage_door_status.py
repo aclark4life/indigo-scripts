@@ -1,6 +1,8 @@
 import os
 import time
 
+# ------------------------------------------------------------------------------
+
 INDIGO_ADMINS = os.environ.get('INDIGO_ADMINS', [
     'aclark@aclark.net',
 ])
@@ -24,6 +26,8 @@ indigo.server.log(email_message)
 
 time_elapsed = 0
 time_start = time.time()  # https://stackoverflow.com/a/3620972
+
+# ------------------------------------------------------------------------------
 
 while True:
     door_obj = indigo.devices[252434934]
