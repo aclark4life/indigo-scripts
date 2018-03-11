@@ -32,4 +32,15 @@ Installation
     git clone git@github.com:aclarknet/indigo-scripts.git
     cd indigo-scripts
     export INDIGO_ADMINS=aclark@aclark.net,
+
+
+Start
+~~~~~
+
     indigohost -x garage_door_status.py
+
+Stop
+~~~~
+
+    CTRL-Z
+    kill -9 %1
