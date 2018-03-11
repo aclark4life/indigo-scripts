@@ -22,8 +22,7 @@ email_subject = 'Garage Door Status Update'
 email_message = '%s: Waiting for garage door to open...' % email_subject
 
 for email_to in INDIGO_ADMINS:
-    indigo.server.sendEmailTo(
-        email_to, subject=email_subject, body=email_message)
+    send_mail(email_to=email_to, subject=email_subject, body=email_message)
 indigo.server.log(email_message)
 
 time_elapsed = 0
