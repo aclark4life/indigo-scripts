@@ -34,14 +34,14 @@ while True:
     # email_message = ("%s is %s (%s)" % (door_obj.name, door_state,
     #                                     time_elapsed))
 
-    email_message = 'Garage door has been open for %s. '
+    email_message = '%s: Garage door has been open for %s. '
     email_message += 'Please check camera and close if needed.'
 
     if door_state != 'closed':
         time_elapsed = time.time() - time_start
 
         if time_elapsed > 300:  # 5 minutes
-            email_message = email_message % '5 minutes'
+            email_message = email_message % (email_subject, '5 minutes')
             for email_to in INDIGO_ADMINS:
                 send_mail(
                     email_to=email_to,
@@ -51,7 +51,7 @@ while True:
             time.sleep(300)
 
         if time_elapsed > 900:  # 15 minutes
-            email_message = email_message % '15 minutes'
+            email_message = email_message % (email_subject, '15 minutes')
             for email_to in INDIGO_ADMINS:
                 send_mail(
                     email_to=email_to,
@@ -61,7 +61,7 @@ while True:
             time.sleep(300)
 
         if time_elapsed > 1800:
-            email_message = email_message % '30 minutes'
+            email_message = email_message % (email_subject, '30 minutes')
             for email_to in INDIGO_ADMINS:
                 send_mail(
                     email_to=email_to,
