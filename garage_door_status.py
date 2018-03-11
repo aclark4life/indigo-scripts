@@ -8,12 +8,6 @@ email_subject = 'Garage Door Status Update'
 email_message = 'Waiting for garage door to open or close'
 email_message_5 = 'Garage door has been open for 5 minutes. Please check camera and close if needed.'
 
-indigo.server.sendEmailTo(email_to, subject=email_subject, body=email_message)
-indigo.server.log(email_message)
-
-time_elapsed = 0
-time_start = time.time()  # https://stackoverflow.com/a/3620972
-
 
 def send_mail(**kwargs):
     indigo.server.sendEmailTo(
@@ -22,6 +16,14 @@ def send_mail(**kwargs):
         body=kwargs['email_message'])
     indigo.server.log(kwargs['email_message'])
 
+
+for email_to in INDIGO_ADMINS:
+    indigo.server.sendEmailTo(
+        email_to, subject=email_subject, body=email_message)
+indigo.server.log(email_message)
+
+time_elapsed = 0
+time_start = time.time()  # https://stackoverflow.com/a/3620972
 
 while True:
     door_obj = indigo.devices[252434934]
