@@ -34,7 +34,7 @@ Install
     alias indigohost='/Library/Application\ Support/Perceptive\ Automation/Indigo\ 7/IndigoPluginHost.app/Contents/MacOS/IndigoPluginHost'
     git clone git@github.com:aclarknet/indigo-scripts.git
     cd indigo-scripts
-    export INDIGO_ADMINS=aclark@aclark.net,
+    export INDIGO_ADMINS=aclark@aclark.net
 
 Start
 +++++
