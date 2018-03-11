@@ -4,6 +4,8 @@ import time
 INDIGO_ADMINS = os.environ.get('INDIGO_ADMINS', 'aclark@aclark.net')
 if INDIGO_ADMINS and INDIGO_ADMINS.find(',') == -1:
     INDIGO_ADMINS = [INDIGO_ADMINS]
+else:
+    INDIGO_ADMINS = INDIGO_ADMINS.split(',')
 
 
 def send_mail(**kwargs):
@@ -18,6 +20,8 @@ email_subject = 'Garage Door Status Update'
 email_message = '%s: Waiting for garage door to open...' % email_subject
 send_mail(body=email_message, subject=email_subject)
 indigo.server.log(email_message)
+indigo.server.log(
+    "Sending notification emails to %s." % INDIGO_ADMINS.join(','))
 
 time_elapsed = 0
 time_start = time.time()  # https://stackoverflow.com/a/3620972
