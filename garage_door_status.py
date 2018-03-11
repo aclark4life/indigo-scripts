@@ -1,7 +1,7 @@
 import os
 import time
 
-email_to = os.environ.get('INDIGO_ADMINS', [
+INDIGO_ADMINS = os.environ.get('INDIGO_ADMINS', [
     'aclark@aclark.net',
 ])
 email_subject = 'Garage Door Status Update'
@@ -34,20 +34,29 @@ while True:
         time_elapsed = time.time() - time_start
 
         if time_elapsed > 300:  # 5 minutes
-            send_mail(
-                email_to=email_to, subject=email_subject, body=email_message_5)
+            for email_to in INDIGO_ADMINS:
+                send_mail(
+                    email_to=email_to,
+                    subject=email_subject,
+                    body=email_message_5)
             indigo.server.log(email_message)
             time.sleep(300)
 
         if time_elapsed > 900:  # 15 minutes
-            send_mail(
-                email_to=email_to, subject=email_subject, body=email_message_5)
+            for email_to in INDIGO_ADMINS:
+                send_mail(
+                    email_to=email_to,
+                    subject=email_subject,
+                    body=email_message_5)
             indigo.server.log(email_message)
             time.sleep(300)
 
         if time_elapsed > 1800:
-            send_mail(
-                email_to=email_to, subject=email_subject, body=email_message_5)
+            for email_to in INDIGO_ADMINS:
+                send_mail(
+                    email_to=email_to,
+                    subject=email_subject,
+                    body=email_message_5)
             # XXX Actually close the door here
             indigo.server.log(email_message)
             time.sleep(300)
