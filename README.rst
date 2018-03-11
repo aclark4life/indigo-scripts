@@ -23,8 +23,8 @@ Write a Python script that does the following: Notify owner and administrative u
             if garage door closed, exit loop 1, else loop
     END
 
-Installation and operation from Terminal
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Installation and usage from Terminal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
