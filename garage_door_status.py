@@ -21,7 +21,7 @@ email_message = '%s: Waiting for garage door to open...' % email_subject
 send_mail(body=email_message, subject=email_subject)
 indigo.server.log(email_message)
 indigo.server.log(
-    "Sending notification emails to %s." % INDIGO_ADMINS.join(','))
+    "Sending notification emails to %s." % ','.join(INDIGO_ADMINS))
 
 time_elapsed = 0
 time_start = time.time()  # https://stackoverflow.com/a/3620972
