@@ -7,22 +7,19 @@ INDIGO_ADMINS = os.environ.get('INDIGO_ADMINS', [
 
 
 def send_mail(**kwargs):
-    email_to = kwargs['email_to']
-    indigo.server.log("Sending email to: %s." % email_to)
-    indigo.server.sendEmailTo(
-        email_to,
-        subject=kwargs['email_subject'],
-        body=kwargs['email_message'])
-    indigo.server.log(kwargs['email_message'])
+    for email_to in INDIGO_ADMINS.split(','):
+        indigo.server.log("Sending email to: %s." % email_to)
+        indigo.server.sendEmailTo(
+            email_to,
+            subject=kwargs['email_subject'],
+            body=kwargs['email_message'])
 
 
 # ------------------------------------------------------------------------------
 
 email_subject = 'Garage Door Status Update'
 email_message = '%s: Waiting for garage door to open...' % email_subject
-
-for email_to in INDIGO_ADMINS:
-    send_mail(email_to=email_to, subject=email_subject, body=email_message)
+send_mail(body=email_message, subject=email_subject)
 indigo.server.log(email_message)
 
 time_elapsed = 0
@@ -43,31 +40,19 @@ while True:
 
         if time_elapsed > 300:  # 5 minutes
             email_message = email_message % (email_subject, '5 minutes')
-            for email_to in INDIGO_ADMINS:
-                send_mail(
-                    email_to=email_to,
-                    subject=email_subject,
-                    body=email_message)
+            send_mail(body=email_message, subject=email_subject)
             indigo.server.log(email_message)
             time.sleep(300)
 
         if time_elapsed > 900:  # 15 minutes
             email_message = email_message % (email_subject, '15 minutes')
-            for email_to in INDIGO_ADMINS:
-                send_mail(
-                    email_to=email_to,
-                    subject=email_subject,
-                    body=email_message)
+            send_mail(body=email_message, subject=email_subject)
             indigo.server.log(email_message)
             time.sleep(300)
 
         if time_elapsed > 1800:
             email_message = email_message % (email_subject, '30 minutes')
-            for email_to in INDIGO_ADMINS:
-                send_mail(
-                    email_to=email_to,
-                    subject=email_subject,
-                    body=email_message)
+            send_mail(body=email_message, subject=email_subject)
             # XXX Actually close the door here
             indigo.server.log(email_message)
             time.sleep(300)
