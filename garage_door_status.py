@@ -3,6 +3,7 @@ import time
 
 INDIGO_ADMINS = ('aclark@aclark.net', )
 
+indigo.server.sendEmailTo('aclark@aclark.net', subject='wtf', body='wtf')
 
 def send_mail(**kwargs):
     for email_to in INDIGO_ADMINS:
