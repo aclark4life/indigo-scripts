@@ -7,8 +7,10 @@ INDIGO_ADMINS = os.environ.get('INDIGO_ADMINS', [
 
 
 def send_mail(**kwargs):
+    email_to = kwargs['email_to']
+    indigo.server.log("Sending email to: %s." % email_to)
     indigo.server.sendEmailTo(
-        kwargs['email_to'],
+        email_to,
         subject=kwargs['email_subject'],
         body=kwargs['email_message'])
     indigo.server.log(kwargs['email_message'])
