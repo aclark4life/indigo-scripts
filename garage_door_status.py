@@ -17,7 +17,7 @@ def send_mail(**kwargs):
 # ------------------------------------------------------------------------------
 
 email_subject = 'Garage Door Status Update'
-email_message = 'Waiting for garage door to open or close'
+email_message = '%s: program initialized and waiting...' % email_subject
 
 for email_to in INDIGO_ADMINS:
     indigo.server.sendEmailTo(
