@@ -1,17 +1,27 @@
 import os
 import time
 
-email_address = os.environ.get('INDIGO_NOTIFY_EMAIL', 'aclark@aclark.net')
+email_to = os.environ.get('INDIGO_ADMINS', [
+    'aclark@aclark.net',
+])
 email_subject = 'Garage Door Status Update'
 email_message = 'Waiting for garage door to open or close'
 email_message_5 = 'Garage door has been open for 5 minutes. Please check camera and close if needed.'
 
-indigo.server.sendEmailTo(
-    email_address, subject=email_subject, body=email_message)
+indigo.server.sendEmailTo(email_to, subject=email_subject, body=email_message)
 indigo.server.log(email_message)
 
 time_elapsed = 0
 time_start = time.time()  # https://stackoverflow.com/a/3620972
+
+
+def send_mail(**kwargs):
+    indigo.server.sendEmailTo(
+        kwargs['email_to'],
+        subject=kwargs['email_subject'],
+        body=kwargs['email_message'])
+    indigo.server.log(kwargs['email_message'])
+
 
 while True:
     door_obj = indigo.devices[252434934]
@@ -24,23 +34,21 @@ while True:
         time_elapsed = time.time() - time_start
 
         if time_elapsed > 300:  # 5 minutes
-            indigo.server.sendEmailTo(
-                email_address, subject=email_subject, body=email_message_5)
+            send_mail(
+                email_to=email_to, subject=email_subject, body=email_message_5)
             indigo.server.log(email_message)
             time.sleep(300)
 
         if time_elapsed > 900:  # 15 minutes
-            indigo.server.sendEmailTo(
-                email_address, subject=email_subject, body=email_message)
+            send_mail(
+                email_to=email_to, subject=email_subject, body=email_message_5)
             indigo.server.log(email_message)
             time.sleep(300)
 
         if time_elapsed > 1800:
-
+            send_mail(
+                email_to=email_to, subject=email_subject, body=email_message_5)
             # XXX Actually close the door here
-
-            indigo.server.sendEmailTo(
-                email_address, subject=email_subject, body=email_message)
             indigo.server.log(email_message)
             time.sleep(300)
     else:
