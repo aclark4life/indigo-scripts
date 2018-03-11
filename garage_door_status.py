@@ -1,7 +1,7 @@
 import os
 import time
 
-INDIGO_ADMINS = ['aclark@aclark.net']
+INDIGO_ADMINS = ['aclark@aclark.net', ]
 
 
 def send_mail(**kwargs):
