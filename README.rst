@@ -1,18 +1,6 @@
 Indigo Scripts
 ==============
 
-To be copied to ``/Library/Application Support/Perceptive Automation/Indigo 7`` as described here:
-
-- http://wiki.indigodomo.com/doku.php?id=indigo_7_documentation:plugin_guide#indigo_support_folder_structure
-
-And to be executed as described here("You can drop Python scripts and AppleScripts into this folder and they will show up in your plugin's sub-menu on the new “Plugins” menu. "):
-
-- http://wiki.indigodomo.com/doku.php?id=indigo_7_documentation:plugin_guide#menu_items_folder
-
-Also see:
-
-- http://wiki.indigodomo.com/doku.php?id=indigo_7_documentation:plugin_scripting_tutorial
-
 Task #1
 -------
 
@@ -34,3 +22,14 @@ Write a Python script that does the following: Notify owner and administrative u
                     if garage door closed, exit loop 2, else loop
             if garage door closed, exit loop 1, else loop
     END
+
+Installation
+~~~~~~~~~~~~
+
+::
+
+    alias indigohost='/Library/Application\ Support/Perceptive\ Automation/Indigo\ 7/IndigoPluginHost.app/Contents/MacOS/IndigoPluginHost'
+    git clone git@github.com:aclarknet/indigo-scripts.git
+    cd indigo-scripts
+    export INDIGO_ADMINS=aclark@aclark.net,
+    indigohost -x garage_door_status.py
