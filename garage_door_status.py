@@ -53,10 +53,11 @@ while True:
             time.sleep(300)
 
         if time_elapsed > 1800:
-            email_message += ' Closing door.'
+            # email_message += ' Closing door.'
             email_message = email_message % (email_subject, '30 minutes')
             send_mail(body=email_message, subject=email_subject)
-            door_state_obj = True
+            # XXX Actually close the door here.
+            # door_state_obj = True
             indigo.server.log(email_message)
             time.sleep(300)
     else:
