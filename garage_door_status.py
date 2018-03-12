@@ -28,7 +28,8 @@ time_start = time.time()  # https://stackoverflow.com/a/3620972
 
 while True:
     door_obj = indigo.devices[252434934]
-    door_state = door_obj.states[u'binaryInput1.ui']
+    door_state_ui = door_obj.states[u'binaryInput1.ui']
+    door_state_obj = door_obj.states[u'binaryInput1']
 
     # email_message = ("%s is %s (%s)" % (door_obj.name, door_state,
     #                                     time_elapsed))
@@ -36,7 +37,7 @@ while True:
     email_message = '%s: Garage door has been open for %s. '
     email_message += 'Please check camera and close if needed.'
 
-    if door_state != 'closed':
+    if door_state_ui != 'closed':
         time_elapsed = time.time() - time_start
 
         if time_elapsed > 300:  # 5 minutes
@@ -52,9 +53,10 @@ while True:
             time.sleep(300)
 
         if time_elapsed > 1800:
+            email_message += ' Closing door.'
             email_message = email_message % (email_subject, '30 minutes')
             send_mail(body=email_message, subject=email_subject)
-            # XXX Actually close the door here
+            door_state_obj = True
             indigo.server.log(email_message)
             time.sleep(300)
     else:
