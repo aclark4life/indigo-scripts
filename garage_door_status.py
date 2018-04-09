@@ -58,9 +58,7 @@ while True:
             email_message = email_message % '30 minutes'
             send_mail(body=email_message, subject=email_subject)
             # Actually close the door.
-            door_output_obj = True
-            time.sleep(1)
-            door_output_obj = False
+            # XXX
             indigo.server.log(email_message)
             time.sleep(300)
     else:
