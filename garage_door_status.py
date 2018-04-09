@@ -17,7 +17,7 @@ def send_mail(**kwargs):
 # ------------------------------------------------------------------------------
 
 email_subject = 'Garage Door Status Update'
-email_message = '%s: Waiting for garage door to open...' % email_subject
+email_message = 'Waiting for garage door to open...'
 send_mail(body=email_message, subject=email_subject)
 indigo.server.log(email_message)
 indigo.server.log(
@@ -35,29 +35,31 @@ while True:
     # email_message = ("%s is %s (%s)" % (door_obj.name, door_input,
     #                                     time_elapsed))
 
-    email_message = '%s: Garage door has been open for %s. '
+    email_message = 'Garage door has been open for %s. '
     email_message += 'Please check camera and close if needed.'
 
     if door_input_ui != 'closed':
         time_elapsed = time.time() - time_start
 
         if time_elapsed > 300:  # 5 minutes
-            email_message = email_message % (email_subject, '5 minutes')
+            email_message = email_message % '5 minutes'
             send_mail(body=email_message, subject=email_subject)
             indigo.server.log(email_message)
             time.sleep(300)
 
         if time_elapsed > 900:  # 15 minutes
-            email_message = email_message % (email_subject, '15 minutes')
+            email_message = email_message % '15 minutes'
             send_mail(body=email_message, subject=email_subject)
             indigo.server.log(email_message)
             time.sleep(300)
 
         if time_elapsed > 1800:
             # email_message += ' Closing door.'
-            email_message = email_message % (email_subject, '30 minutes')
+            email_message = email_message % '30 minutes'
             send_mail(body=email_message, subject=email_subject)
-            # XXX Actually close the door here.
+            # Actually close the door.
+            door_output_obj = True
+            time.sleep(5)
             door_output_obj = False
             indigo.server.log(email_message)
             time.sleep(300)
